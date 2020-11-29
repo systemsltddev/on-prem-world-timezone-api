@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="timezone-api-cicd-pipeline-test-suite.xml" />
+	<munit:test name="timezone-api-cicd-pipeline-test-suite-timezone-api-cicd-pipelineFlowTest" doc:id="32ed9e76-f9d1-47f3-a59f-4226af482a37" description="Test">
+		<munit:execution >
+			<flow-ref doc:name="Flow Reference" doc:id="976680ad-1e2c-43ce-b842-6e45f4a646db" name="timezone-api-cicd-pipeline-test-suiteFlow"/>
+			<flow-ref doc:name="Flow-ref to timezone-api-cicd-pipelineFlow" doc:id="d6665564-ab2b-47e5-8ec8-861b38e44a8f" name="timezone-api-cicd-pipelineFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="5af5cc35-d04b-4238-a7ba-5a0cbd8337bd" is="#[MunitTools::notNullValue()]" message="Payload is NULL" expression="#[payload]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="timezone-api-cicd-pipeline-test-suite-timezone-api-cicd-pipelineFlowTest1" doc:id="2ec5373a-efc7-4541-b844-97a706b4a645" description="Test">
+		<munit:execution >
+			<flow-ref doc:name="Flow Reference" doc:id="3633cff8-16a7-46ad-843c-59a94bc7f3bf" name="timezone-api-cicd-pipeline-test-suiteFlow"/>
+			<flow-ref doc:name="Flow-ref to timezone-api-cicd-pipelineFlow" doc:id="10ddc9a1-3d3f-4ff6-a3e0-fca37f108c5c" name="timezone-api-cicd-pipelineFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="1bad1eb7-1a8a-4ada-8b4d-df4aa16c1b53" is="#[MunitTools::withMediaType('application/json')]" message="Media Type is not Correct" expression="#[payload]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="timezone-api-cicd-pipeline-test-suite-timezone-api-cicd-pipelineFlowTest2" doc:id="4aa961a7-691e-42f6-803a-286090ee8384" description="Test">
+		<munit:execution >
+			<flow-ref doc:name="Flow Reference" doc:id="4a75a622-1b88-44bf-87eb-bddcfbf86a7f" name="timezone-api-cicd-pipeline-test-suiteFlow"/>
+			<flow-ref doc:name="Flow-ref to timezone-api-cicd-pipelineFlow" doc:id="83d44c4f-48ba-4068-af36-2f6962635be6" name="timezone-api-cicd-pipelineFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="2a75f0d0-8147-4b99-a647-2ab35b25a407" is="#[MunitTools::equalTo(false)]" message="DST Value is not coorect" expression="#[payload.dst]"/>
+		</munit:validation>
+	</munit:test>
+	<flow name="timezone-api-cicd-pipeline-test-suiteFlow" doc:id="bfe71711-9b7d-4dfc-bdf0-6b7a1a1b12cf">
+		<munit:set-event doc:name="Set Event" doc:id="74938b4a-9939-4a65-b4c1-99ed12d3a08b" >
+			<munit:attributes value='#[{uriParams:{region:"europe",city:"london"}}]' />
+		</munit:set-event>
+	</flow>
+
+
+</mule>
